@@ -74,6 +74,8 @@ import org.eclipse.tracecompass.tmf.ui.widgets.timegraph.widgets.ITimeDataProvid
 import org.eclipse.tracecompass.tmf.ui.widgets.timegraph.widgets.TimeGraphColorScheme;
 import org.eclipse.tracecompass.tmf.ui.widgets.timegraph.widgets.TimeGraphScale;
 
+import com.google.common.base.Objects;
+
 /**
  * Re-usable histogram widget.
  *
@@ -678,7 +680,12 @@ public abstract class Histogram implements ControlListener, PaintListener, KeyLi
                         return;
                     }
                     fDataModel.setSelection(fSelectionBegin, fSelectionEnd);
-                    fScaledData = fDataModel.scaleTo(canvasWidth, canvasHeight, 1);
+                    HistogramScaledData scaledData = fDataModel.scaleTo(canvasWidth, canvasHeight, 1);
+                    if (Objects.equal(scaledData, fScaledData)) {
+                        return;
+                    }
+                    fScaledData = scaledData;
+
                     try (TraceCompassLogUtils.FlowScopeLog fs1 = new TraceCompassLogUtils.FlowScopeLogBuilder(LOGGER, Level.FINER, "Histogram:ui").setParentScope(fs).build()) { //$NON-NLS-1$
                         synchronized (fDataModel) {
                             if (fScaledData != null) {
