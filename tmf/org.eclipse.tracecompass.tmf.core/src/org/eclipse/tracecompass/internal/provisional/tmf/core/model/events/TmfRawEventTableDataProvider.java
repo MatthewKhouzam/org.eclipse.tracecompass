@@ -87,7 +87,7 @@ public class TmfRawEventTableDataProvider extends AbstractTmfTableDataProvider i
     /**
      * Extension point ID.
      */
-    public static final String ID = "org.eclipse.tracecompass.internal.provisional.tmf.core.model.events.TmfEventTableDataProvider"; //$NON-NLS-1$
+    public static final String ID = "org.eclipse.tracecompass.internal.provisional.tmf.core.model.events.TmfRawEventTableDataProvider"; //$NON-NLS-1$
 
     private @Nullable ITmfFilter fFilter;
 

@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2018 Ericsson
+ * Copyright (c) 2025 Ericsson
  *
  * All rights reserved. This program and the accompanying materials are
  * made available under the terms of the Eclipse Public License 2.0 which
@@ -26,25 +26,23 @@ import org.eclipse.tracecompass.tmf.core.model.tree.ITmfTreeDataProvider;
 import org.eclipse.tracecompass.tmf.core.trace.ITmfTrace;
 
 /**
- * {@link TmfEventTableDataProvider} factory, uses the data provider extension
+ * {@link TmfRawEventTableDataProviderFactory} factory, uses the data provider extension
  * point.
- *
- * @author Simon Delisle
- * @since 4.0
  */
-public class TmfEventTableRawDataProviderFactory implements IDataProviderFactory {
+public class TmfRawEventTableDataProviderFactory implements IDataProviderFactory {
 
     private static final IDataProviderDescriptor DESCRIPTOR =
             new DataProviderDescriptor.Builder()
-                        .setId(TmfEventTableDataProvider.ID+".raw")
-                        .setName(NonNullUtils.nullToEmptyString(Messages.EventsTableDataProvider_Title + " raw"))
-                        .setDescription(NonNullUtils.nullToEmptyString(Messages.EventsTableDataProviderFactory_DescriptionText))
+                        .setId(TmfRawEventTableDataProvider.ID)
+                        .setName(NonNullUtils.nullToEmptyString("Raw Event Data")) //$NON-NLS-1$
+                        .setDescription("Raw event data returned as a JSON object") //$NON-NLS-1$
                         .setProviderType(ProviderType.DATA_RAW)
+                        .setParentId(TmfEventTableDataProvider.ID)
                         .build();
 
     @Override
     public @Nullable ITmfTreeDataProvider<? extends ITmfTreeDataModel> createProvider(@NonNull ITmfTrace trace) {
-        return new TmfEventTableDataProvider(trace);
+        return new TmfRawEventTableDataProvider(trace);
     }
 
     @Override
