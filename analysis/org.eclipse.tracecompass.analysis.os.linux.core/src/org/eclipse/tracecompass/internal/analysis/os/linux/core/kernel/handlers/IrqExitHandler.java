@@ -56,6 +56,9 @@ public class IrqExitHandler extends KernelEventHandler {
                 break;
             }
         }
+        if (quark == ITmfStateSystem.INVALID_ATTRIBUTE) {
+            return;
+        }
         String name = ss.getAttributeName(quark);
         /* Put this IRQ back to inactive in the resource tree */
         long timestamp = KernelEventHandlerUtils.getTimestamp(event);
